@@ -1,6 +1,6 @@
 <div class="containerHome">
     <section class="usersStorefront">
-        <div class="userCard" ng-repeat="user in homeCtrl.users">
+        <div class="userCard" ng-repeat="user in homeCtrl.users track by user.id">
             <img class="userCard__img" ng-src="{{user.photo}}" alt="user image" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
             <p class="userCard__name">Nombre: {{user.name}}</p>
             <p class="userCard__phone">Teléfono: {{user.phone}}</p>
@@ -13,19 +13,21 @@
             <button>Datos</button>
         </div>
 
-        <form class="userForm" name="mainForm" ng-model="mainForm" novalidate ng-model-options="{ updateOn: 'blur', allowInvalid: '$inherit' }">
+        <form class="userForm" name="mainForm" ng-model="mainForm" novalidate>
 
             <p>Nombre: </p>
-            <input class="userForm__input" type="text" placeholder="Name...">
+            <input class="userForm__input" type="text" placeholder="Name..." ng-model="homeCtrl.newUser.name">
 
             <p>Email: </p>
-            <input class="userForm__input" type="text" placeholder="Email...">
+            <input class="userForm__input" type="text" placeholder="Email..." ng-model="homeCtrl.newUser.email">
 
             <p>Teléfono: </p>
-            <input class="userForm__input" type="text" placeholder="Phone...">
+            <input class="userForm__input" type="text" placeholder="Phone..." ng-model="homeCtrl.newUser.phone">
 
             <p>Foto: </p>
-            <input class="userForm__input" type="text" placeholder="Url Photo...">
+            <input class="userForm__input" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo">
+
+            <button ng-click="homeCtrl.addUser()">Añadir Usuario</button>
 
         </form>
     </aside>

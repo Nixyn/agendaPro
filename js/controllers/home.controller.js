@@ -5,8 +5,8 @@
         .module('AgendaPRO')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ["UsersLocalProvider"];
-    function HomeController(UsersLocalProvider) {
+    HomeController.$inject = ["UsersLocalProvider", "GifsGiphyProvider"];
+    function HomeController(UsersLocalProvider, GifsGiphyProvider) {
         // Variables Declaration
         var vm = this;
         vm.users = [];
@@ -18,6 +18,7 @@
         vm.loadUserToEdit = loadUserToEdit;
         vm.editUser = editUser;
         vm.deleteUser = deleteUser;
+        vm.loadGifsSearch = loadGifsSearch;
 
         activate();
 
@@ -64,6 +65,9 @@
             }
         }
 
+        function loadGifsSearch(search) {
+            GifsGiphyProvider.getSearch(search).then(gifsRecived);
+        }
         //////////////// AUX FUNCTIONS
 
         function createID() {
@@ -73,6 +77,14 @@
         function cleanFields() {
             vm.newUser = {};
             vm.isEditProcess = false;
+        }
+
+        function gifsRecived(response) {
+            var gifsStorefront = angular.element(document.querySelector('.gifsStorefront'));
+
+            for (let i = 0; i < response.length; i++) {
+                gifsStorefront.append('<img class="gifsStorefront__gif" src="' + response[i] + '">');
+            }
         }
     }
 })();

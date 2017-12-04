@@ -10,7 +10,8 @@
         var service = {
             getUsers:getUsers,
             add:add,
-            remove:remove
+            remove:remove,
+            editUser:editUser
         };
         
         return service;
@@ -44,7 +45,14 @@
         }
 
         function editUser(user){
+            let users = JSON.parse(localStorage.getItem("users"));
+            let idToEdit = user.id;
             
+            for (let i = 0; i < users.length; i++) {
+                const userID = users[i].id;
+                if(userID==idToEdit) users[i]= user;
+            }
+            localStorage.setItem("users",JSON.stringify(users));
         }
     }
 })();

@@ -11,9 +11,12 @@
         var vm = this;
         vm.users=[];
         vm.newUser = {};
+        vm.isEditProcess = false;
 
         // Functions Declaration
         vm.addUser = addUser;
+        vm.loadUserToEdit = loadUserToEdit;
+        vm.editUser = editUser;
 
         activate();
 
@@ -30,6 +33,22 @@
             cleanFields();
         }
 
+        function loadUserToEdit(userToEdit){
+            vm.newUser = Object.assign({}, userToEdit);
+            vm.isEditProcess = true;
+        }
+
+        function editUser(){
+            let idToEdit = vm.newUser.id;
+            
+            for (let i = 0; i < vm.users.length; i++) {
+                const userID = vm.users[i].id;
+                if(userID==idToEdit) vm.users[i]= vm.newUser;
+            }
+            UsersLocalProvider.editUser(vm.newUser);
+            cleanFields();
+        }
+
         //////////////// AUX FUNCTIONS
 
         function createID() {   
@@ -38,6 +57,7 @@
 
         function cleanFields(){
             vm.newUser = {};
+            vm.isEditProcess = false;
         }
     }
 })();

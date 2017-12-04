@@ -1,10 +1,16 @@
 <div class="containerHome">
     <section class="usersStorefront">
+
         <div class="userCard" ng-repeat="user in homeCtrl.users track by user.id">
             <img class="userCard__img" ng-src="{{user.photo}}" alt="user image" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
             <p class="userCard__name">Nombre: {{user.name}}</p>
             <p class="userCard__phone">Teléfono: {{user.phone}}</p>
+
+            <button>More</button>
+            <button ng-click="homeCtrl.loadUserToEdit(user)">Edit</button>
+            <button>Delete</button>
         </div>
+        
     </section>
 
     <aside class="userConfig">
@@ -27,7 +33,8 @@
             <p>Foto: </p>
             <input class="userForm__input" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo">
 
-            <button ng-click="homeCtrl.addUser()">Añadir Usuario</button>
+            <button ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()">Añadir Usuario</button>
+            <button ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()">Modificar</button>
 
         </form>
     </aside>

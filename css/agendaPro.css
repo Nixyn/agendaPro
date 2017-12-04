@@ -14,12 +14,17 @@
     width: 65%;
     height: 100%;
     background: red;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start; /* Revisar no se cumple */
+    overflow-y: scroll;
 }
 
 .userCard{
     width: 300px;
     height: 200px;
     background: green;
+    margin: 10px;
 }
 
 .userCard__img{

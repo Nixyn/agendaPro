@@ -8,7 +8,7 @@
     </div>
     <div class="favGifs">
         <h2>Gifs Favoritos</h2>
-        <img ng-repeat="gif in userCtrl.user.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.removeGif(gif)">
+        <img class="favGifs__img" ng-repeat="gif in userCtrl.user.favGifs track by gif.id" ng-src="{{gif.url}}">
     </div>
     <div class="favComics">
         <h2>Comics Favoritos</h2>

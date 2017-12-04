@@ -5,18 +5,11 @@
         .module('AgendaPRO')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = [];
-    function HomeController() {
+    HomeController.$inject = ["UsersLocalProvider"];
+    function HomeController(UsersLocalProvider) {
         // Variables Declaration
         var vm = this;
-        vm.users=[
-            {
-                id: "s58k9qgzqe",
-                photo: "",
-                name: "pedro",
-                phone: "656656565"
-            }
-        ];
+        vm.users=[];
         vm.newUser = {};
 
         // Functions Declaration
@@ -26,12 +19,15 @@
 
         //////////////// MAIN FUNCTIONS
 
-        function activate() { }
+        function activate() { 
+            vm.users = UsersLocalProvider.getUsers()
+        }
 
         function addUser(){
             vm.newUser.id = createID();
+            UsersLocalProvider.add(vm.newUser);
             vm.users.push(vm.newUser);
-            cleanFields()
+            cleanFields();
         }
 
         //////////////// AUX FUNCTIONS

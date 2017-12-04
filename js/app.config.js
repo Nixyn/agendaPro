@@ -10,7 +10,12 @@
             controller: "HomeController",
             templateUrl: "/views/home.html",
             controllerAs: "homeCtrl"
-        });
+        })
+        .when("/user/:id", {
+            controller: "UserController",
+            templateUrl: "/views/user.html",
+            controllerAs: "UserCtrl"
+        })
     }
 
 })();

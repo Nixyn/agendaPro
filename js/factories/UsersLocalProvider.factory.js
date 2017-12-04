@@ -42,8 +42,7 @@
                 const userID = users[i].id;
                 if(userID==idToDelete) users.splice(i,1);
             }
-            console.log(users)
-            console.log(idToDelete)
+            
             localStorage.setItem("users",JSON.stringify(users));
         }
 

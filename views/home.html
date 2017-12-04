@@ -55,5 +55,21 @@
                 <img ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.images.preview_webp.url}}" ng-click="homeCtrl.addGif(gif)">
             </div>
         </div>
+
+        <div class="userConfigComics">
+            <h2>Comics Favoritos</h2>
+            <div class="favUserComics">
+                <img ng-repeat="comic in homeCtrl.newUser.favComics track by $index" ng-src="{{comic.photo}}" ng-click="homeCtrl.removeComic(comic)">
+            </div>
+
+            <div class="searchComics">
+                <input class="searchComics__input" type="text" ng-model="homeCtrl.searchComics.text">
+                <button ng-click="homeCtrl.loadComicsSearch(homeCtrl.searchComics)">Buscar</button>
+            </div>
+
+            <div class="comicsStorefront">
+                <img ng-repeat="comic in homeCtrl.comics track by $index" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)">
+            </div>
+        </div>
     </aside>
 </div>

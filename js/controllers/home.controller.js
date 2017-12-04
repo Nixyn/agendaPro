@@ -5,14 +5,15 @@
         .module('AgendaPRO')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ["UsersLocalProvider", "GifsGiphyProvider"];
-    function HomeController(UsersLocalProvider, GifsGiphyProvider) {
+    HomeController.$inject = ["UsersLocalProvider", "GifsGiphyProvider", "MarvelComicsProvider"];
+    function HomeController(UsersLocalProvider, GifsGiphyProvider, MarvelComicsProvider) {
         // Variables Declaration
         var vm = this;
         vm.users = [];
         vm.newUser = {};
         vm.isEditProcess = false;
         vm.gifs = []
+        vm.comics = []
 
         // Functions Declaration
         vm.addUser = addUser;
@@ -22,6 +23,9 @@
         vm.loadGifsSearch = loadGifsSearch;
         vm.addGif = addGif;
         vm.removeGif = removeGif;
+        vm.loadComicsSearch = loadComicsSearch;
+        vm.addComic = addComic;
+        vm.removeComic = removeComic;
 
         activate();
 
@@ -72,11 +76,11 @@
             GifsGiphyProvider.getSearch(search).then(gifsRecived);
         }
 
-        function addGif(gif){
+        function addGif(gif) {
             let gifToAdd = {};
             checkExistFavGifs();
-            let isNotExistId = vm.newUser.favGifs.find(favGif => {return favGif.id == gif.id });
-            if(typeof isNotExistId === "undefined"){
+            let isNotExistId = vm.newUser.favGifs.find(favGif => { return favGif.id == gif.id });
+            if (typeof isNotExistId === "undefined") {
                 gifToAdd.id = gif.id;
                 gifToAdd.url = gif.images.preview_webp.url;
                 vm.newUser.favGifs.push(gifToAdd);
@@ -84,10 +88,33 @@
             console.log(vm.newUser.favGifs);
         }
 
-        function removeGif(gif){
+        function removeGif(gif) {
             for (let i = 0; i < vm.newUser.favGifs.length; i++) {
                 const userID = vm.newUser.favGifs[i].id;
                 if (userID == gif.id) vm.newUser.favGifs.splice(i, 1);
+            }
+        }
+
+        function loadComicsSearch(search) {
+            MarvelComicsProvider.getSearch(search).then(comicsRecived);
+        }
+
+        function addComic(comic) {
+            let comicToAdd = {};
+            checkExistFavComics();
+            let isNotExistId = vm.newUser.favComics.find(favComic => { return favComic.id == comic.id });
+            if (typeof isNotExistId === "undefined") {
+                comicToAdd.id = comic.id;
+                comicToAdd.url = comic.images.preview_webp.url;
+                vm.newUser.favComics.push(comicToAdd);
+            }
+            console.log(vm.newUser.favComics);
+        }
+        
+        function removeComic(comic) {
+            for (let i = 0; i < vm.newUser.favComics.length; i++) {
+                const userID = vm.newUser.favComics[i].id;
+                if (userID == comic.id) vm.newUser.favComics.splice(i, 1);
             }
         }
         //////////////// AUX FUNCTIONS
@@ -105,8 +132,15 @@
             vm.gifs = response;
         }
 
-        function checkExistFavGifs(){
-            if(typeof vm.newUser.favGifs === "undefined") vm.newUser.favGifs = [];
+        function checkExistFavGifs() {
+            if (typeof vm.newUser.favGifs === "undefined") vm.newUser.favGifs = [];
+        }
+        
+        function comicsRecived(response) {
+            vm.comics = response;
+        }
+        function checkExistFavComics() {
+            if (typeof vm.newUser.favComics === "undefined") vm.newUser.favComics = [];
         }
     }
 })();

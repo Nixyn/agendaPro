@@ -1,0 +1,32 @@
+<div class="containerHome">
+    <section class="usersStorefront">
+        <div class="userCard" ng-repeat="user in homeCtrl.users">
+            <img class="userCard__img" ng-src="{{user.photo}}" alt="user image" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
+            <p class="userCard__name">Nombre: {{user.name}}</p>
+            <p class="userCard__phone">Teléfono: {{user.phone}}</p>
+        </div>
+    </section>
+
+    <aside class="userConfig">
+        <div class="configNav">
+            <h2>Nuevo Usuario</h2>
+            <button>Datos</button>
+        </div>
+
+        <form class="userForm" name="mainForm" ng-model="mainForm" novalidate ng-model-options="{ updateOn: 'blur', allowInvalid: '$inherit' }">
+
+            <p>Nombre: </p>
+            <input class="userForm__input" type="text" placeholder="Name...">
+
+            <p>Email: </p>
+            <input class="userForm__input" type="text" placeholder="Email...">
+
+            <p>Teléfono: </p>
+            <input class="userForm__input" type="text" placeholder="Phone...">
+
+            <p>Foto: </p>
+            <input class="userForm__input" type="text" placeholder="Url Photo...">
+
+        </form>
+    </aside>
+</div>

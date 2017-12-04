@@ -1,6 +1,6 @@
 <div class="containerUser">
     <div class="userDetails">
-        <img class="userDetails__img" ng-src="{{userCtrl.user.photo}}" alt="user image" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
+        <img class="userDetails__img" ng-src="{{userCtrl.user.photo}}" alt="favourites gifs" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
         <h2>Datos Personales: </h2>
         <p>{{userCtrl.user.name}}</p>
         <p>{{userCtrl.user.email}}</p>
@@ -8,6 +8,7 @@
     </div>
     <div class="favGifs">
         <h2>Gifs Favoritos</h2>
+        <img ng-repeat="gif in userCtrl.user.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.removeGif(gif)">
     </div>
     <div class="favComics">
         <h2>Comics Favoritos</h2>

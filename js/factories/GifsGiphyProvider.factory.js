@@ -27,7 +27,7 @@
             let arrayGifsUrl = [];
             let data = response.data.data;
             for(let i=0; i<data.length;i++){
-                arrayGifsUrl.push(data[i].images.preview_webp.url);
+                arrayGifsUrl.push(data[i]);
             }
             return arrayGifsUrl;
         }

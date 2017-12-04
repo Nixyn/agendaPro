@@ -12,6 +12,7 @@
         vm.users = [];
         vm.newUser = {};
         vm.isEditProcess = false;
+        vm.gifs = []
 
         // Functions Declaration
         vm.addUser = addUser;
@@ -19,6 +20,8 @@
         vm.editUser = editUser;
         vm.deleteUser = deleteUser;
         vm.loadGifsSearch = loadGifsSearch;
+        vm.addGif = addGif;
+        vm.removeGif = removeGif;
 
         activate();
 
@@ -68,6 +71,25 @@
         function loadGifsSearch(search) {
             GifsGiphyProvider.getSearch(search).then(gifsRecived);
         }
+
+        function addGif(gif){
+            let gifToAdd = {};
+            checkExistFavGifs();
+            let isNotExistId = vm.newUser.favGifs.find(favGif => {return favGif.id == gif.id });
+            if(typeof isNotExistId === "undefined"){
+                gifToAdd.id = gif.id;
+                gifToAdd.url = gif.images.preview_webp.url;
+                vm.newUser.favGifs.push(gifToAdd);
+            }
+            console.log(vm.newUser.favGifs);
+        }
+
+        function removeGif(gif){
+            for (let i = 0; i < vm.newUser.favGifs.length; i++) {
+                const userID = vm.newUser.favGifs[i].id;
+                if (userID == gif.id) vm.newUser.favGifs.splice(i, 1);
+            }
+        }
         //////////////// AUX FUNCTIONS
 
         function createID() {
@@ -80,11 +102,11 @@
         }
 
         function gifsRecived(response) {
-            var gifsStorefront = angular.element(document.querySelector('.gifsStorefront'));
+            vm.gifs = response;
+        }
 
-            for (let i = 0; i < response.length; i++) {
-                gifsStorefront.append('<img class="gifsStorefront__gif" src="' + response[i] + '">');
-            }
+        function checkExistFavGifs(){
+            if(typeof vm.newUser.favGifs === "undefined") vm.newUser.favGifs = [];
         }
     }
 })();

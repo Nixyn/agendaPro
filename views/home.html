@@ -41,7 +41,9 @@
 
         <div class="userConfigGifs">
             <h2>Gifs Favoritos</h2>
-            <div class="favUserGifs"></div>
+            <div class="favUserGifs">
+                <img ng-repeat="gif in homeCtrl.newUser.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.removeGif(gif)">
+            </div>
 
             <div class="searchGifs">
                 <input class="searchGifs__input" type="text" ng-model="homeCtrl.searchGif.text">
@@ -49,7 +51,9 @@
                 <button ng-click="homeCtrl.loadGifsSearch(homeCtrl.searchGif)">Buscar</button>
             </div>
 
-            <div class="gifsStorefront"></div>
+            <div class="gifsStorefront">
+                <img ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.images.preview_webp.url}}" ng-click="homeCtrl.addGif(gif)">
+            </div>
         </div>
     </aside>
 </div>

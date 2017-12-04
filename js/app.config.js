@@ -14,7 +14,7 @@
         .when("/user/:id", {
             controller: "UserController",
             templateUrl: "/views/user.html",
-            controllerAs: "UserCtrl"
+            controllerAs: "userCtrl"
         })
     }
 

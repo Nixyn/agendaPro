@@ -11,7 +11,8 @@
             getUsers:getUsers,
             add:add,
             remove:remove,
-            editUser:editUser
+            editUser:editUser,
+            get:get
         };
         
         return service;
@@ -56,6 +57,15 @@
             }
             
             localStorage.setItem("users",JSON.stringify(users));
+        }
+
+        function get(userId){
+            let users = JSON.parse(localStorage.getItem("users"));
+            
+            for (let i = 0; i < users.length; i++) {
+                const userID = users[i].id;
+                if(userID==userId) return users[i];
+            }
         }
     }
 })();

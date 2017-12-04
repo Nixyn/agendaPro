@@ -37,10 +37,13 @@
         function remove(user){                     
             let users = JSON.parse(localStorage.getItem("users"));
             let idToDelete = user.id;
+
             for (let i = 0; i < users.length; i++) {
                 const userID = users[i].id;
                 if(userID==idToDelete) users.splice(i,1);
             }
+            console.log(users)
+            console.log(idToDelete)
             localStorage.setItem("users",JSON.stringify(users));
         }
 
@@ -52,6 +55,7 @@
                 const userID = users[i].id;
                 if(userID==idToEdit) users[i]= user;
             }
+            
             localStorage.setItem("users",JSON.stringify(users));
         }
     }

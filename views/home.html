@@ -17,6 +17,7 @@
         <div class="configNav">
             <h2>Nuevo Usuario</h2>
             <button>Datos</button>
+            <button>Gifs</button>
         </div>
 
         <form class="userForm" name="mainForm" ng-model="mainForm" novalidate>
@@ -37,5 +38,18 @@
             <button ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()">Modificar</button>
 
         </form>
+
+        <div class="userConfigGifs">
+            <h2>Gifs Favoritos</h2>
+            <div class="favUserGifs"></div>
+
+            <div class="searchGifs">
+                <input class="searchGifs__input" type="text">
+                <span>Épicos</span> | <span>Recientes</span>
+                <button>Buscar</button>
+            </div>
+
+            <div class="gifsStorefront"></div>
+        </div>
     </aside>
 </div>

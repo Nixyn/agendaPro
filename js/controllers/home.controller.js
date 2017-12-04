@@ -12,8 +12,10 @@
         vm.users = [];
         vm.newUser = {};
         vm.isEditProcess = false;
-        vm.gifs = []
-        vm.comics = []
+        vm.gifs = [];
+        vm.comics = [];
+        vm.searchComics = {};
+        vm.searchGifs = {};
 
         // Functions Declaration
         vm.addUser = addUser;
@@ -26,6 +28,8 @@
         vm.loadComicsSearch = loadComicsSearch;
         vm.addComic = addComic;
         vm.removeComic = removeComic;
+        vm.checkFavComics = checkFavComics;
+        vm.checkFavGifs = checkFavGifs;
 
         activate();
 
@@ -73,19 +77,18 @@
         }
 
         function loadGifsSearch(search) {
-            GifsGiphyProvider.getSearch(search).then(gifsRecived);
+            GifsGiphyProvider.getSearch(search).then(response => vm.gifs = response);
+            vm.searchGif.text = "";
         }
 
         function addGif(gif) {
-            let gifToAdd = {};
             checkExistFavGifs();
-            let isNotExistId = vm.newUser.favGifs.find(favGif => { return favGif.id == gif.id });
-            if (typeof isNotExistId === "undefined") {
-                gifToAdd.id = gif.id;
-                gifToAdd.url = gif.images.preview_webp.url;
-                vm.newUser.favGifs.push(gifToAdd);
+
+            let isExistId = vm.newUser.favGifs.includes(gif); 
+       
+            if (!isExistId) {
+                vm.newUser.favGifs.push(gif);
             }
-            console.log(vm.newUser.favGifs);
         }
 
         function removeGif(gif) {
@@ -96,19 +99,18 @@
         }
 
         function loadComicsSearch(search) {
-            MarvelComicsProvider.getSearch(search).then(comicsRecived);
+            MarvelComicsProvider.getSearch(search).then(response => vm.comics = response);
+            vm.searchComics.text = "";
         }
 
         function addComic(comic) {
-            let comicToAdd = {};
             checkExistFavComics();
-            let isNotExistId = vm.newUser.favComics.find(favComic => { return favComic.id == comic.id });
-            if (typeof isNotExistId === "undefined") {
-                comicToAdd.id = comic.id;
-                comicToAdd.photo = comic.photo;
-                vm.newUser.favComics.push(comicToAdd);
+            
+            let isExistId = vm.newUser.favComics.includes(comic);
+
+            if (!isExistId) {
+                vm.newUser.favComics.push(comic);
             }
-            console.log(vm.newUser);
         }
         
         function removeComic(comic) {
@@ -116,6 +118,16 @@
                 const userID = vm.newUser.favComics[i].id;
                 if (userID == comic.id) vm.newUser.favComics.splice(i, 1);
             }
+        }
+
+        function checkFavGifs(item){
+            checkExistFavGifs();            
+            return vm.newUser.favGifs.includes(item);
+        }
+
+        function checkFavComics(item){
+            checkExistFavComics();
+            return vm.newUser.favComics.includes(item);
         }
         //////////////// AUX FUNCTIONS
 
@@ -126,18 +138,10 @@
         function cleanFields() {
             vm.newUser = {};
             vm.isEditProcess = false;
-        }
-
-        function gifsRecived(response) {
-            vm.gifs = response;
-        }
+        }        
 
         function checkExistFavGifs() {
             if (typeof vm.newUser.favGifs === "undefined") vm.newUser.favGifs = [];
-        }
-        
-        function comicsRecived(response) {
-            vm.comics = response;
         }
 
         function checkExistFavComics() {

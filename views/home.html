@@ -52,14 +52,15 @@
             </div>
 
             <div class="gifsStorefront">
-                <img ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.images.preview_webp.url}}" ng-click="homeCtrl.addGif(gif)">
+                <img ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)" ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
             </div>
         </div>
 
         <div class="userConfigComics">
             <h2>Comics Favoritos</h2>
             <div class="favUserComics">
-                <img ng-repeat="comic in homeCtrl.newUser.favComics track by $index" ng-src="{{comic.photo}}" ng-click="homeCtrl.removeComic(comic)">
+                <img ng-repeat="comic in homeCtrl.newUser.favComics track by comic.id" ng-src="{{comic.photo}}" 
+                    ng-click="homeCtrl.removeComic(comic)">
             </div>
 
             <div class="searchComics">
@@ -68,7 +69,7 @@
             </div>
 
             <div class="comicsStorefront">
-                <img ng-repeat="comic in homeCtrl.comics track by $index" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)">
+                <img ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)" ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
             </div>
         </div>
     </aside>

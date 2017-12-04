@@ -26,12 +26,16 @@
         //////////////// AUX FUNTIONS
         
         function gifsRecived(response){
-            let arrayGifsUrl = [];
+            let arrayGifs = [];
             let data = response.data.data;
+            
             for(let i=0; i<data.length;i++){
-                arrayGifsUrl.push(data[i]);
+                let gif = {};
+                gif.id = data[i].id;
+                gif.url = data[i].images.preview_webp.url;
+                arrayGifs.push(gif);
             }
-            return arrayGifsUrl;
+            return arrayGifs;
         }
 
         function failRequest(e){

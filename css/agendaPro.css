@@ -17,7 +17,7 @@
 .usersStorefront{
     width: 65%;
     height: 100%;
-    background: red;
+    background: rgb(255, 255, 255);
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start; /* Revisar no se cumple */
@@ -27,7 +27,7 @@
 .userCard{
     width: 300px;
     height: 200px;
-    background: green;
+    background: rgb(82, 85, 82);
     margin: 10px;
 }
 
@@ -41,7 +41,7 @@
 .userConfig{
     width: 35%;
     height: 100%;
-    background: blue;
+    background: rgb(118, 126, 126);
     overflow-y: scroll;
 }
 
@@ -64,4 +64,8 @@
 .userDetails__img{
     width: 100px;
     height: 100px;
+}
+
+.borderClass{
+    border: 5px black solid;
 }

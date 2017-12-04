@@ -16,13 +16,15 @@
         vm.comics = [];
         vm.searchComics = {};
         vm.searchGifs = {};
-
+        vm.view = 0;
+        
         // Functions Declaration
         vm.addUser = addUser;
         vm.loadUserToEdit = loadUserToEdit;
         vm.editUser = editUser;
         vm.deleteUser = deleteUser;
         vm.loadGifsSearch = loadGifsSearch;
+        vm.changeView = changeView;
         vm.addGif = addGif;
         vm.removeGif = removeGif;
         vm.loadComicsSearch = loadComicsSearch;
@@ -74,6 +76,12 @@
 
                 UsersLocalProvider.remove(userToDelete);
             }
+        }
+
+        function changeView(view){
+            if(view==0) vm.view = 0;
+            if(view==1) vm.view = 1;
+            if(view==2) vm.view = 2;
         }
 
         function loadGifsSearch(search) {

@@ -16,11 +16,12 @@
     <aside class="userConfig">
         <div class="configNav">
             <h2>Nuevo Usuario</h2>
-            <button>Datos</button>
-            <button>Gifs</button>
+            <button ng-click="homeCtrl.changeView(0)">Datos</button>
+            <button ng-click="homeCtrl.changeView(1)">Gifs</button>
+            <button ng-click="homeCtrl.changeView(2)">Comics</button>
         </div>
 
-        <form class="userForm" name="mainForm" ng-model="mainForm" novalidate>
+        <form class="userForm" name="mainForm" ng-model="mainForm" novalidate ng-show="homeCtrl.view== 0" ng-hide="homeCtrl.view != 0">
 
             <p>Nombre: </p>
             <input class="userForm__input" type="text" placeholder="Name..." ng-model="homeCtrl.newUser.name">
@@ -33,13 +34,9 @@
 
             <p>Foto: </p>
             <input class="userForm__input" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo">
-
-            <button ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()">Añadir Usuario</button>
-            <button ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()">Modificar</button>
-
         </form>
 
-        <div class="userConfigGifs">
+        <div class="userConfigGifs"  ng-show="homeCtrl.view == 1" ng-hide="homeCtrl.view != 1">
             <h2>Gifs Favoritos</h2>
             <div class="favUserGifs">
                 <img ng-repeat="gif in homeCtrl.newUser.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.removeGif(gif)">
@@ -56,7 +53,7 @@
             </div>
         </div>
 
-        <div class="userConfigComics">
+        <div class="userConfigComics"  ng-show="homeCtrl.view == 2" ng-hide="homeCtrl.view != 2">
             <h2>Comics Favoritos</h2>
             <div class="favUserComics">
                 <img ng-repeat="comic in homeCtrl.newUser.favComics track by comic.id" ng-src="{{comic.photo}}" 
@@ -72,5 +69,9 @@
                 <img ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)" ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
             </div>
         </div>
+
+        <button ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()">Añadir Usuario</button>
+        <button ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()">Modificar</button>
+        
     </aside>
 </div>

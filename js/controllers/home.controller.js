@@ -105,10 +105,10 @@
             let isNotExistId = vm.newUser.favComics.find(favComic => { return favComic.id == comic.id });
             if (typeof isNotExistId === "undefined") {
                 comicToAdd.id = comic.id;
-                comicToAdd.url = comic.images.preview_webp.url;
+                comicToAdd.photo = comic.photo;
                 vm.newUser.favComics.push(comicToAdd);
             }
-            console.log(vm.newUser.favComics);
+            console.log(vm.newUser);
         }
         
         function removeComic(comic) {
@@ -139,6 +139,7 @@
         function comicsRecived(response) {
             vm.comics = response;
         }
+
         function checkExistFavComics() {
             if (typeof vm.newUser.favComics === "undefined") vm.newUser.favComics = [];
         }

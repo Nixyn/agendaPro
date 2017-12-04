@@ -12,5 +12,6 @@
     </div>
     <div class="favComics">
         <h2>Comics Favoritos</h2>
+        <img ng-repeat="comic in userCtrl.user.favComics track by comic.id" ng-src="{{comic.photo}}">
     </div>
 </div>

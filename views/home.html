@@ -21,19 +21,19 @@
             <button ng-click="homeCtrl.changeView(2)">Comics</button>
         </div>
 
-        <form class="userForm" name="mainForm" ng-model="mainForm" novalidate ng-show="homeCtrl.view== 0" ng-hide="homeCtrl.view != 0">
+        <form class="userForm" name="mainForm" ng-model="homeCtrl.mainForm" novalidate ng-show="homeCtrl.view == 0" ng-hide="homeCtrl.view != 0">
 
             <p>Nombre: </p>
-            <input class="userForm__input" type="text" placeholder="Name..." ng-model="homeCtrl.newUser.name">
+            <input class="userForm__input" type="text" placeholder="Name..." ng-model="homeCtrl.newUser.name" ng-minlength="3" ng-maxlength="25" ng-required="true">
 
             <p>Email: </p>
-            <input class="userForm__input" type="text" placeholder="Email..." ng-model="homeCtrl.newUser.email">
+            <input class="userForm__input" type="email" placeholder="Email..." ng-model="homeCtrl.newUser.email" ng-required="true">
 
             <p>Teléfono: </p>
-            <input class="userForm__input" type="text" placeholder="Phone..." ng-model="homeCtrl.newUser.phone">
+            <input class="userForm__input" type="number" placeholder="Phone..." ng-model="homeCtrl.newUser.phone" ng-minlength="9" ng-maxlength="9" ng-required="true">
 
             <p>Foto: </p>
-            <input class="userForm__input" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo">
+            <input class="userForm__input" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo" ng-minlength="3" ng-required="true">
         </form>
 
         <div class="userConfigGifs"  ng-show="homeCtrl.view == 1" ng-hide="homeCtrl.view != 1">
@@ -73,7 +73,7 @@
             <button ng-click="homeCtrl.increaseComicsOffsetRequest(homeCtrl.searchComics)">Mas comics</button>
         </div>
 
-        <button ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()">Añadir Usuario</button>
+        <button ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()" ng-disabled="mainForm.$invalid">Añadir Usuario</button>
         <button ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()">Modificar</button>
         
     </aside>

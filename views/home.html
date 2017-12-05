@@ -43,13 +43,15 @@
             </div>
 
             <div class="searchGifs">
-                <input class="searchGifs__input" type="text" ng-model="homeCtrl.searchGif.text">
+                <input class="searchGifs__input" type="text" ng-model="homeCtrl.searchGifs.text">
                 <span>Épicos</span> | <span>Recientes</span>
-                <button ng-click="homeCtrl.loadGifsSearch(homeCtrl.searchGif)">Buscar</button>
+                <button ng-click="homeCtrl.loadGifsSearch(homeCtrl.searchGifs)">Buscar</button>
             </div>
 
             <div class="gifsStorefront">
                 <img ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)" ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
+                <button ng-if="homeCtrl.searchGifs.offset>0" ng-click="homeCtrl.decreaseGifsOffsetRequest(homeCtrl.searchGifs)">Menos gifs</button>
+                <button ng-click="homeCtrl.increaseGifsOffsetRequest(homeCtrl.searchGifs)">Mas gifs</button>
             </div>
         </div>
 
@@ -61,13 +63,14 @@
             </div>
 
             <div class="searchComics">
-                <input class="searchComics__input" type="text" ng-model="homeCtrl.searchComics.text">
-                <button ng-click="homeCtrl.loadComicsSearch(homeCtrl.searchComics)">Buscar</button>
+                <input class="searchComics__input" type="text" ng-model="homeCtrl.searchComics.text" ng-keyup="homeCtrl.timedSearchOfComics(homeCtrl.searchComics)">
             </div>
 
             <div class="comicsStorefront">
                 <img ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)" ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
             </div>
+            <button ng-if="homeCtrl.searchComics.offset>0" ng-click="homeCtrl.decreaseComicsOffsetRequest(homeCtrl.searchComics)">Menos comics</button>
+            <button ng-click="homeCtrl.increaseComicsOffsetRequest(homeCtrl.searchComics)">Mas comics</button>
         </div>
 
         <button ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()">Añadir Usuario</button>

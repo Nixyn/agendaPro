@@ -14,8 +14,10 @@
         vm.isEditProcess = false;
         vm.gifs = [];
         vm.comics = [];
-        vm.searchComics = {};
         vm.searchGifs = {};
+        vm.searchGifs.offset = 0;
+        vm.searchComics = {};
+        vm.searchComics.offset = 0;
         vm.view = 0;
         
         // Functions Declaration
@@ -27,11 +29,15 @@
         vm.changeView = changeView;
         vm.addGif = addGif;
         vm.removeGif = removeGif;
-        vm.loadComicsSearch = loadComicsSearch;
         vm.addComic = addComic;
         vm.removeComic = removeComic;
         vm.checkFavComics = checkFavComics;
         vm.checkFavGifs = checkFavGifs;
+        vm.timedSearchOfComics = timedSearchOfComics;
+        vm.increaseGifsOffsetRequest = increaseGifsOffsetRequest
+        vm.decreaseGifsOffsetRequest = decreaseGifsOffsetRequest
+        vm.increaseComicsOffsetRequest = increaseComicsOffsetRequest
+        vm.decreaseComicsOffsetRequest = decreaseComicsOffsetRequest 
 
         activate();
 
@@ -86,7 +92,6 @@
 
         function loadGifsSearch(search) {
             GifsGiphyProvider.getSearch(search).then(response => vm.gifs = response);
-            vm.searchGif.text = "";
         }
 
         function addGif(gif) {
@@ -106,16 +111,12 @@
             }
         }
 
-        function loadComicsSearch(search) {
-            MarvelComicsProvider.getSearch(search).then(response => vm.comics = response);
-            vm.searchComics.text = "";
-        }
-
+        
         function addComic(comic) {
             checkExistFavComics();
             
             let isExistId = vm.newUser.favComics.includes(comic);
-
+            
             if (!isExistId) {
                 vm.newUser.favComics.push(comic);
             }
@@ -127,33 +128,64 @@
                 if (userID == comic.id) vm.newUser.favComics.splice(i, 1);
             }
         }
-
-        function checkFavGifs(item){
+        
+        function checkFavGifs(item){ /* Mejorar naming de esto */
             checkExistFavGifs();            
             return vm.newUser.favGifs.includes(item);
         }
-
+        
         function checkFavComics(item){
             checkExistFavComics();
             return vm.newUser.favComics.includes(item);
         }
-        //////////////// AUX FUNCTIONS
+        
+        function timedSearchOfComics(search){
+            setTimeout(()=>{
+                loadComicsSearch(search)
+            },400);
+        }
 
+        function increaseGifsOffsetRequest(search){
+            search.offset += 8;
+            loadGifsSearch(search);    
+        }
+
+        function decreaseGifsOffsetRequest(search){
+            if(search.offset>0) search.offset -= 8;
+            loadGifsSearch(search);
+        }
+
+        function increaseComicsOffsetRequest(search){
+            search.offset += 3;
+            loadComicsSearch(search);            
+        }
+
+        function decreaseComicsOffsetRequest(search){
+            if(search.offset>0) search.offset -= 3;
+            loadComicsSearch(search);       
+        }
+        
+        //////////////// AUX FUNCTIONS
+        
         function createID() {
             return Math.random().toString(36).substr(2, 10);
         }
-
+        
         function cleanFields() {
             vm.newUser = {};
             vm.isEditProcess = false;
         }        
-
+        
         function checkExistFavGifs() {
             if (typeof vm.newUser.favGifs === "undefined") vm.newUser.favGifs = [];
         }
-
+        
         function checkExistFavComics() {
             if (typeof vm.newUser.favComics === "undefined") vm.newUser.favComics = [];
+        }
+
+        function loadComicsSearch(search) {
+            MarvelComicsProvider.getSearch(search).then(response => vm.comics = response);
         }
     }
 })();

@@ -14,8 +14,16 @@
         .when("/user/:id", {
             controller: "UserController",
             templateUrl: "/views/user.html",
-            controllerAs: "userCtrl"
+            controllerAs: "userCtrl",
+            resolve: {
+                user: loadFirstUser
+            }
         })
     }
 
 })();
+
+loadFirstUser.$inject = ["$route","UsersLocalProvider"];
+function loadFirstUser($route,UsersLocalProvider){
+    return UsersLocalProvider.get($route.current.params.id);
+}

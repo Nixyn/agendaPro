@@ -17,7 +17,6 @@
         function getSearch(search) {
             let url = "";
             let limit = 8;
-            console.log("Gyph: ",search);
             if (search.trending == true) url = "https://api.giphy.com/v1/gifs/trending/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + limit + "&offset=" + search.offset + "&rating=G&lang=en";
             else url = "https://api.giphy.com/v1/gifs/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + limit + "&offset=" + search.offset + "&rating=G&lang=en";
             return $http.get(url)
@@ -30,7 +29,6 @@
         function gifsRecived(response) {
             let arrayGifs = [];
             let data = response.data.data;
-            console.log("giphy response: ",response);
             
             for (let i = 0; i < data.length; i++) {
                 let gif = {};

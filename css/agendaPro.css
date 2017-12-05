@@ -1,6 +1,9 @@
 /* HOME VIEW */
 /* --------------------------------- */
 /* --------------------------------- */
+body{
+    font-family: "Nunito";
+}
 
 /* GLOBAL */
 /* --------------------------------- */
@@ -24,25 +27,93 @@
     overflow-y: scroll;
 }
 
+.usersStorefront::-webkit-scrollbar { 
+    display: none;
+}
+
 .userCard{
     width: 300px;
-    height: 200px;
-    background: rgb(82, 85, 82);
+    height: 130px;
+    background: rgb(240, 240, 240);
+    border-radius: 5px;
     margin: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.userCard__features{
+    display: flex;
+    flex-flow: column;
+    margin: 0 10px;
 }
 
 .userCard__img{
-    width: 70px;
-    height: 70px;
+    width: 130px;
+    height: 130px;
     background-color: black;
+}
+
+.userCard__buttons{
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.userCard__buttons__more{
+    width: 30px;
+    height: 30px;
+    background: url("https://cdn0.iconfinder.com/data/icons/typicons-2/24/eye-128.png");
+    background-size: 30px 30px;
+    display: block;
+}
+.userCard__buttons__edit{
+    width: 30px;
+    height: 30px;
+    background: url("https://cdn0.iconfinder.com/data/icons/typicons-2/24/edit-128.png");
+    background-size: 30px 30px;
+    display: block;
+    border: 0;
+}
+.userCard__buttons__delete{
+    width: 30px;
+    height: 30px;
+    background: url("https://cdn0.iconfinder.com/data/icons/typicons-2/24/delete-outline-128.png");
+    background-size: 30px 30px;
+    display: block;
+    border: 0;
 }
 /* USER CONFIG */
 /* --------------------------------- */
 .userConfig{
     width: 35%;
     height: 100%;
-    background: rgb(118, 126, 126);
-    overflow-y: scroll;
+    background: white;
+    box-shadow:  -1px 0 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 10;
+    position: relative;
+}
+
+.userForm,.userConfigComics,.userConfigGifs{
+    width: 90%;
+    border: 1px dashed grey;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 40px 15px;
+    margin: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* User Form */
+.userForm__titleInput{
+    margin: 8px 0 0 0;
 }
 
 .userForm__input.ng-touched.ng-invalid-maxlength{
@@ -58,6 +129,64 @@
 .userForm__input.ng-touched.ng-invalid-email{
     background: #faa2a2;
     color: #662a2a;
+}
+
+/* User Gifs */
+.searchGifs{
+    width: 100%;
+}
+
+.favUserGifs{
+    width: 100%;
+    height: 120px;
+    border-radius: 5px;
+    background: rgb(235, 235, 235);
+    align-self: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    overflow-y: scroll;
+    margin: 10px 0;
+}
+
+.favUserGifs::-webkit-scrollbar{
+    display: none;
+}
+
+.favUserGifs__img,.gifsStorefront__img{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+/* User Comics */
+.searchComics{
+    width: 100%;
+}
+
+.favUserComics{
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    background: rgb(235, 235, 235);
+    align-self: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    overflow-y: scroll;
+    margin: 10px 0;
+}
+
+.favUserComics::-webkit-scrollbar{
+    display: none;
+}
+
+.favUserComics__img,.comicsStorefront__img{
+    height: 130px;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 /* USER VIEW */

@@ -3,78 +3,88 @@
 
         <div class="userCard" ng-repeat="user in homeCtrl.users track by user.id">
             <img class="userCard__img" ng-src="{{user.photo}}" alt="user image" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
-            <p class="userCard__name">Nombre: {{user.name}}</p>
-            <p class="userCard__phone">Teléfono: {{user.phone}}</p>
-
-            <a href="#!/user/{{user.id}}">More</a>
-            <button ng-click="homeCtrl.loadUserToEdit(user)">Edit</button>
-            <button ng-click="homeCtrl.deleteUser(user)">Delete</button>
+            <div class="userCard__features">
+                <p class="userCard__name">Nombre: {{user.name}}</p>
+                <p class="userCard__phone">Teléfono: {{user.phone}}</p>
+                <div class="userCard__buttons">
+                    <a class="userCard__buttons__more" href="#!/user/{{user.id}}"></a>
+                    <button class="userCard__buttons__edit" ng-click="homeCtrl.loadUserToEdit(user)"></button>
+                    <button class="userCard__buttons__delete" ng-click="homeCtrl.deleteUser(user)"></button>
+                </div>
+            </div>
         </div>
-        
+
     </section>
 
     <aside class="userConfig">
         <div class="configNav">
-            <h2>Nuevo Usuario</h2>
-            <button ng-click="homeCtrl.changeView(0)">Datos</button>
-            <button ng-click="homeCtrl.changeView(1)">Gifs</button>
-            <button ng-click="homeCtrl.changeView(2)">Comics</button>
+            <h2 ng-if="!homeCtrl.isEditProcess">Nuevo Usuario</h2>
+            <h2 ng-if="homeCtrl.isEditProcess">Usuario: {{homeCtrl.newUser.name}}</h2>
+            <button class="btn" ng-click="homeCtrl.changeView(0)">Datos</button>
+            <button class="btn" ng-click="homeCtrl.changeView(1)">Gifs</button>
+            <button class="btn" ng-click="homeCtrl.changeView(2)">Comics</button>
         </div>
 
         <form class="userForm" name="mainForm" ng-model="homeCtrl.mainForm" novalidate ng-show="homeCtrl.view == 0" ng-hide="homeCtrl.view != 0">
 
-            <p>Nombre: </p>
-            <input class="userForm__input" type="text" placeholder="Name..." ng-model="homeCtrl.newUser.name" ng-minlength="3" ng-maxlength="25" ng-required="true">
+            <p class="userForm__titleInput">Nombre: </p>
+            <input class="userForm__input form-control" type="text" placeholder="Name..." ng-model="homeCtrl.newUser.name" ng-minlength="3"
+                ng-maxlength="25" ng-required="true">
 
-            <p>Email: </p>
-            <input class="userForm__input" type="email" placeholder="Email..." ng-model="homeCtrl.newUser.email" ng-required="true">
+            <p class="userForm__titleInput">Email: </p>
+            <input class="userForm__input form-control" type="email" placeholder="Email..." ng-model="homeCtrl.newUser.email" ng-required="true">
 
-            <p>Teléfono: </p>
-            <input class="userForm__input" type="number" placeholder="Phone..." ng-model="homeCtrl.newUser.phone" ng-minlength="9" ng-maxlength="9" ng-required="true">
+            <p class="userForm__titleInput">Teléfono: </p>
+            <input class="userForm__input form-control" type="number" placeholder="Phone..." ng-model="homeCtrl.newUser.phone" ng-minlength="9"
+                ng-maxlength="9" ng-required="true">
 
-            <p>Foto: </p>
-            <input class="userForm__input" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo" ng-minlength="3" ng-required="true">
+            <p class="userForm__titleInput">Foto: </p>
+            <input class="userForm__input form-control" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo" ng-minlength="3"
+                ng-required="true">
         </form>
 
-        <div class="userConfigGifs"  ng-show="homeCtrl.view == 1" ng-hide="homeCtrl.view != 1">
+        <div class="userConfigGifs" ng-show="homeCtrl.view == 1" ng-hide="homeCtrl.view != 1">
             <h2>Gifs Favoritos</h2>
             <div class="favUserGifs">
-                <img ng-repeat="gif in homeCtrl.newUser.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.removeGif(gif)">
+                <img class="favUserGifs__img" ng-repeat="gif in homeCtrl.newUser.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.removeGif(gif)">
             </div>
 
             <div class="searchGifs">
-                <input class="searchGifs__input" type="text" ng-model="homeCtrl.searchGifs.text">
-                <span>Épicos</span> | <span>Recientes</span>
-                <button ng-click="homeCtrl.loadGifsSearch(homeCtrl.searchGifs)">Buscar</button>
+                <input class="searchGifs__input form-control" type="text" ng-model="homeCtrl.searchGifs.text">
+                <span>Épicos</span> |
+                <span>Recientes</span>
+                <button class="btn" ng-click="homeCtrl.loadGifsSearch(homeCtrl.searchGifs)">Buscar</button>
             </div>
 
             <div class="gifsStorefront">
-                <img ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)" ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
+                <img class="gifsStorefront__img" ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)"
+                    ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
                 <button ng-if="homeCtrl.searchGifs.offset>0" ng-click="homeCtrl.decreaseGifsOffsetRequest(homeCtrl.searchGifs)">Menos gifs</button>
                 <button ng-click="homeCtrl.increaseGifsOffsetRequest(homeCtrl.searchGifs)">Mas gifs</button>
             </div>
         </div>
 
-        <div class="userConfigComics"  ng-show="homeCtrl.view == 2" ng-hide="homeCtrl.view != 2">
+        <div class="userConfigComics" ng-show="homeCtrl.view == 2" ng-hide="homeCtrl.view != 2">
             <h2>Comics Favoritos</h2>
             <div class="favUserComics">
-                <img ng-repeat="comic in homeCtrl.newUser.favComics track by comic.id" ng-src="{{comic.photo}}" 
+                <img class="favUserComics__img" ng-repeat="comic in homeCtrl.newUser.favComics track by comic.id" ng-src="{{comic.photo}}"
                     ng-click="homeCtrl.removeComic(comic)">
             </div>
 
             <div class="searchComics">
-                <input class="searchComics__input" type="text" ng-model="homeCtrl.searchComics.text" ng-keyup="homeCtrl.timedSearchOfComics(homeCtrl.searchComics)">
+                <input class="searchComics__input form-control" type="text" ng-model="homeCtrl.searchComics.text" ng-keyup="homeCtrl.timedSearchOfComics(homeCtrl.searchComics)">
             </div>
 
             <div class="comicsStorefront">
-                <img ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)" ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
+                <img class="comicsStorefront__img" ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)"
+                    ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
             </div>
             <button ng-if="homeCtrl.searchComics.offset>0" ng-click="homeCtrl.decreaseComicsOffsetRequest(homeCtrl.searchComics)">Menos comics</button>
             <button ng-click="homeCtrl.increaseComicsOffsetRequest(homeCtrl.searchComics)">Mas comics</button>
         </div>
 
-        <button ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()" ng-disabled="mainForm.$invalid">Añadir Usuario</button>
-        <button ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()">Modificar</button>
-        
+        <button class="btn btn-success" ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()" ng-disabled="mainForm.$invalid">Añadir Usuario</button>
+        <button class="btn btn-success" ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()" ng-disabled="mainForm.$invalid">Modificar</button>
+
     </aside>
 </div>

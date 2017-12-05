@@ -18,7 +18,6 @@
             let apiKey = "c0f0a669d3d9cb10bc99b228a2809f8f";
             let hash = "be02e436e63fbe4deb1f716e27230084";
             let limit = 3;
-            console.log("Marvel Factory: " + search.offset);
             let url = "https://gateway.marvel.com/v1/public/comics?ts=1&titleStartsWith=" + search.text + "&limit=" + limit + "&offset=" + search.offset + "&apikey=" + apiKey + "&hash=" + hash;
             return $http.get(url)
                 .then(comicsRecived)

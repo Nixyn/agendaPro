@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="personalForm.css">
+<form class="userForm" name="$ctrl.mainForm">
+
+    <p class="userForm__titleInput">Nombre: </p>
+    <input class="userForm__input form-control" type="text" placeholder="Name..." ng-model="$ctrl.newUser.name" ng-minlength="3"
+        ng-maxlength="25" ng-required="true">
+
+    <p class="userForm__titleInput">Email: </p>
+    <input class="userForm__input form-control" type="email" placeholder="Email..." ng-model="$ctrl.newUser.email" ng-required="true">
+
+    <p class="userForm__titleInput">Teléfono: </p>
+    <input class="userForm__input form-control" type="number" placeholder="Phone..." ng-model="$ctrl.newUser.phone" ng-minlength="9"
+        ng-maxlength="9" ng-required="true">
+
+    <p class="userForm__titleInput">Foto: </p>
+    <input class="userForm__input form-control" type="text" placeholder="Url Photo..." ng-model="$ctrl.newUser.photo" ng-minlength="3"
+        ng-required="true">
+        
+</form>

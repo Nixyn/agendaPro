@@ -17,32 +17,21 @@
     </section>
 
     <aside class="userConfig">
+
+        <!-- NAV BAR -->
         <div class="configNav">
             <h2 ng-if="!homeCtrl.isEditProcess">Nuevo Usuario</h2>
-            <h2 ng-if="homeCtrl.isEditProcess">Usuario: {{homeCtrl.newUser.name}}</h2>
-            <button class="btn" ng-click="homeCtrl.changeView(0)">Datos</button>
-            <button class="btn" ng-click="homeCtrl.changeView(1)">Gifs</button>
-            <button class="btn" ng-click="homeCtrl.changeView(2)">Comics</button>
+            <h2 ng-if="homeCtrl.isEditProcess">Modificar Usuario</h2>
+            <button class="btn" ng-click="homeCtrl.view = 0">Datos</button>
+            <button class="btn" ng-click="homeCtrl.view = 1">Gifs</button>
+            <button class="btn" ng-click="homeCtrl.view = 2">Comics</button>
         </div>
 
-        <!-- USER FORM -->
-        <form class="userForm" name="mainForm" ng-model="homeCtrl.mainForm" novalidate ng-show="homeCtrl.view == 0" ng-hide="homeCtrl.view != 0">
+        <personal-form class="personalForm" new-user="homeCtrl.newUser" main-form="homeCtrl.mainForm" ng-show="homeCtrl.view == 0"
+            ng-hide="homeCtrl.view != 0">
+        </personal-form>
 
-            <p class="userForm__titleInput">Nombre: </p>
-            <input class="userForm__input form-control" type="text" placeholder="Name..." ng-model="homeCtrl.newUser.name" ng-minlength="3"
-                ng-maxlength="25" ng-required="true">
 
-            <p class="userForm__titleInput">Email: </p>
-            <input class="userForm__input form-control" type="email" placeholder="Email..." ng-model="homeCtrl.newUser.email" ng-required="true">
-
-            <p class="userForm__titleInput">Teléfono: </p>
-            <input class="userForm__input form-control" type="number" placeholder="Phone..." ng-model="homeCtrl.newUser.phone" ng-minlength="9"
-                ng-maxlength="9" ng-required="true">
-
-            <p class="userForm__titleInput">Foto: </p>
-            <input class="userForm__input form-control" type="text" placeholder="Url Photo..." ng-model="homeCtrl.newUser.photo" ng-minlength="3"
-                ng-required="true">
-        </form>
 
         <!-- GIFS FORM -->
         <div class="userConfigGifs" ng-show="homeCtrl.view == 1" ng-hide="homeCtrl.view != 1">
@@ -58,11 +47,15 @@
                 <button class="btn" ng-click="homeCtrl.loadGifsSearch(homeCtrl.searchGifs)">Buscar</button>
             </div>
 
-            <div class="gifsStorefront">
-                <img class="gifsStorefront__img" ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)"
-                    ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
-                <button class="gifsStorefront__arrowGifs__left" ng-click="homeCtrl.setGifSearchDirection('left')"></button>
-                <button class="gifsStorefront__arrowGifs__right" ng-click="homeCtrl.setGifSearchDirection('right')"></button>
+            <div class="gifsStorefront" ng-show="homeCtrl.gifs.length > 1">
+                <button class="arrow__left" ng-click="homeCtrl.setGifSearchDirection('left')"></button>
+
+                <div class="gifsStorefront__images">
+                    <img class="gifsStorefront__img" ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)"
+                        ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
+                </div>
+
+                <button class="arrow__right" ng-click="homeCtrl.setGifSearchDirection('right')"></button>
             </div>
         </div>
 
@@ -80,15 +73,18 @@
             </div>
 
             <div class="comicsStorefront">
-                <img class="comicsStorefront__img" ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)"
-                    ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
+                <button class="arrow__left" ng-if="homeCtrl.searchComics.offset>0" ng-click="homeCtrl.decreaseComicsOffsetRequest(homeCtrl.searchComics)"></button>
+                <div class="comicsStorefront__images">
+                    <img class="comicsStorefront__img" ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)"
+                        ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
+                </div>
+
+                <button class="arrow__right" ng-click="homeCtrl.increaseComicsOffsetRequest(homeCtrl.searchComics)"></button>
             </div>
-            <button ng-if="homeCtrl.searchComics.offset>0" ng-click="homeCtrl.decreaseComicsOffsetRequest(homeCtrl.searchComics)">Menos comics</button>
-            <button ng-click="homeCtrl.increaseComicsOffsetRequest(homeCtrl.searchComics)">Mas comics</button>
         </div>
 
-        <button class="btn btn-success" ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()" ng-disabled="mainForm.$invalid">Añadir Usuario</button>
-        <button class="btn btn-success" ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()" ng-disabled="mainForm.$invalid">Modificar</button>
+        <button class="btn btn-success" ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()" ng-disabled="homeCtrl.mainForm.$invalid">Añadir Usuario</button>
+        <button class="btn btn-success" ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()" ng-disabled="homeCtrl.mainForm.$invalid">Modificar</button>
 
     </aside>
 </div>

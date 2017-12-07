@@ -139,7 +139,7 @@
         
         function timedSearchOfComics(search){
             setTimeout(()=>{
-                loadComicsSearch(search)
+                loadComicsSearch(search);
             },600);
         }
 
@@ -179,6 +179,7 @@
 
         function loadComicsSearch(search) {
             MarvelComicsProvider.getSearch(search).then(response => vm.comics = response);
+            
         }
     }
 })();

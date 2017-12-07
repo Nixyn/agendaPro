@@ -51,6 +51,7 @@ body{
     width: 130px;
     height: 130px;
     background-color: black;
+    border-right: 5px solid rgb(131, 190, 54);
 }
 
 .userCard__buttons{
@@ -95,7 +96,6 @@ body{
     z-index: 10;
     position: relative;
 }
-
 .userForm,.userConfigComics,.userConfigGifs{
     width: 90%;
     border: 1px dashed grey;
@@ -110,24 +110,8 @@ body{
     justify-content: center;
 }
 
-/* User Form */
-.userForm__titleInput{
-    margin: 8px 0 0 0;
-}
-
-.userForm__input.ng-touched.ng-invalid-maxlength{
-    background: #faa2a2;
-    color: #662a2a;
-}
-
-.userForm__input.ng-touched.ng-invalid-minlength{
-    background: #faa2a2;
-    color: #662a2a;
-}
-
-.userForm__input.ng-touched.ng-invalid-email{
-    background: #faa2a2;
-    color: #662a2a;
+.personalForm{
+    width: 100%;
 }
 
 /* User Gifs */
@@ -153,31 +137,37 @@ body{
 }
 
 .favUserGifs__img,.gifsStorefront__img{
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
     margin: 10px;
     border-radius: 5px;
 }
 
-.gifsStorefront__arrowGifs__left{
+.gifsStorefront{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.gifsStorefront__images{
+    width: 85%;
+}
+
+
+.arrow__right,.arrow__left{
     width: 30px;
     height: 30px;
     display: block;
-    background-image: url("https://cdn4.iconfinder.com/data/icons/mayssam/512/previous-128.png");
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Angle_right_font_awesome.svg/2000px-Angle_right_font_awesome.svg.png");
     background-size: 30px 30px;
     border: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
 
-.gifsStorefront__arrowGifs__right{
-    width: 30px;
-    height: 30px;
-    display: block;
-    background-image: url("https://cdn4.iconfinder.com/data/icons/mayssam/512/previous-128.png");
-    background-size: 30px 30px;
-    border: 0;
+.arrow__left{
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Angle_left_font_awesome.svg/768px-Angle_left_font_awesome.svg.png");
 }
-
 /* User Comics */
 .searchComics{
     width: 100%;
@@ -254,7 +244,7 @@ body{
 
 .userGifs,.userComics{
     width: 100%;
-    height: 120px;
+    height: 60%;
     border-radius: 5px;
     background: rgb(235, 235, 235);
     align-self: center;

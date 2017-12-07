@@ -1,0 +1,33 @@
+/* User Form */
+.userForm{
+    width: 100%;
+    border: 1px dashed grey;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 40px 15px;
+    margin: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.userForm__titleInput{
+    margin: 8px 0 0 0;
+}
+
+.userForm__input.ng-touched.ng-invalid-maxlength{
+    background: #faa2a2;
+    color: #662a2a;
+}
+
+.userForm__input.ng-touched.ng-invalid-minlength{
+    background: #faa2a2;
+    color: #662a2a;
+}
+
+.userForm__input.ng-touched.ng-invalid-email{
+    background: #faa2a2;
+    color: #662a2a;
+}

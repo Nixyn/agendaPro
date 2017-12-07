@@ -7,6 +7,24 @@
 
     GifsGiphyProvider.$inject = ['$http'];
     function GifsGiphyProvider($http) {
+        let vm = this;
+        vm.search = {
+            offsetCount: 0,
+            offset: 8,
+            limit: 8,
+            increaserOffset: function(){
+                this.offsetCount += this.offset;
+            },
+            decreaserOffset: function(){
+                if(this.offsetCount>0) this.offsetCount -= this.offset;
+            },
+            selectVariation: function(direction){
+                if(direction=="right") this.increaserOffset();
+                else if(direction=="left") this.decreaserOffset();
+            }
+
+        }
+
         var service = {
             getSearch: getSearch
         };
@@ -16,9 +34,13 @@
         //////////////// MAIN FUNTIONS
         function getSearch(search) {
             let url = "";
-            let limit = 8;
-            if (search.trending == true) url = "https://api.giphy.com/v1/gifs/trending/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + limit + "&offset=" + search.offset + "&rating=G&lang=en";
-            else url = "https://api.giphy.com/v1/gifs/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + limit + "&offset=" + search.offset + "&rating=G&lang=en";
+            console.log("pre ApiGiphy: ",vm.search);
+            vm.search.selectVariation(search.direction);
+            console.log("post ApiGiphy: ",vm.search);
+
+            if (search.trending == true) url = "https://api.giphy.com/v1/gifs/trending/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + vm.search.limit + "&offset=" + vm.search.offsetCount + "&rating=G&lang=en";
+            else url = "https://api.giphy.com/v1/gifs/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + vm.search.limit + "&offset=" + vm.search.offsetCount + "&rating=G&lang=en";
+            
             return $http.get(url)
                 .then(gifsRecived)
                 .catch(failRequest);

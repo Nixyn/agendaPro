@@ -25,7 +25,8 @@
                 return users;
             } 
             else {
-                return localStorage.setItem("users",JSON.stringify([]));;
+                localStorage.setItem("users",JSON.stringify([]));;
+                return [];
             }
         }
 

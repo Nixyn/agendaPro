@@ -15,7 +15,6 @@
         vm.gifs = [];
         vm.comics = [];
         vm.searchGifs = {};
-        vm.searchGifs.offset = 0;
         vm.searchComics = {};
         vm.searchComics.offset = 0;
         vm.view = 0;
@@ -34,10 +33,9 @@
         vm.checkFavComics = checkFavComics;
         vm.checkFavGifs = checkFavGifs;
         vm.timedSearchOfComics = timedSearchOfComics;
-        vm.increaseGifsOffsetRequest = increaseGifsOffsetRequest
-        vm.decreaseGifsOffsetRequest = decreaseGifsOffsetRequest
-        vm.increaseComicsOffsetRequest = increaseComicsOffsetRequest
-        vm.decreaseComicsOffsetRequest = decreaseComicsOffsetRequest 
+        vm.increaseComicsOffsetRequest = increaseComicsOffsetRequest;
+        vm.decreaseComicsOffsetRequest = decreaseComicsOffsetRequest;
+        vm.setGifSearchDirection = setGifSearchDirection;
 
         activate();
 
@@ -142,17 +140,7 @@
         function timedSearchOfComics(search){
             setTimeout(()=>{
                 loadComicsSearch(search)
-            },400);
-        }
-
-        function increaseGifsOffsetRequest(search){
-            search.offset += 8;
-            loadGifsSearch(search);    
-        }
-
-        function decreaseGifsOffsetRequest(search){
-            if(search.offset>0) search.offset -= 8;
-            loadGifsSearch(search);
+            },600);
         }
 
         function increaseComicsOffsetRequest(search){
@@ -163,6 +151,11 @@
         function decreaseComicsOffsetRequest(search){
             if(search.offset>0) search.offset -= 3;
             loadComicsSearch(search);       
+        }
+
+        function setGifSearchDirection(direction){
+            vm.searchGifs.direction = direction;
+            loadGifsSearch(vm.searchGifs);
         }
         
         //////////////// AUX FUNCTIONS

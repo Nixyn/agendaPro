@@ -25,6 +25,7 @@
             <button class="btn" ng-click="homeCtrl.changeView(2)">Comics</button>
         </div>
 
+        <!-- USER FORM -->
         <form class="userForm" name="mainForm" ng-model="homeCtrl.mainForm" novalidate ng-show="homeCtrl.view == 0" ng-hide="homeCtrl.view != 0">
 
             <p class="userForm__titleInput">Nombre: </p>
@@ -43,6 +44,7 @@
                 ng-required="true">
         </form>
 
+        <!-- GIFS FORM -->
         <div class="userConfigGifs" ng-show="homeCtrl.view == 1" ng-hide="homeCtrl.view != 1">
             <h2>Gifs Favoritos</h2>
             <div class="favUserGifs">
@@ -59,11 +61,12 @@
             <div class="gifsStorefront">
                 <img class="gifsStorefront__img" ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)"
                     ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
-                <button ng-if="homeCtrl.searchGifs.offset>0" ng-click="homeCtrl.decreaseGifsOffsetRequest(homeCtrl.searchGifs)">Menos gifs</button>
-                <button ng-click="homeCtrl.increaseGifsOffsetRequest(homeCtrl.searchGifs)">Mas gifs</button>
+                <button class="gifsStorefront__arrowGifs__left" ng-click="homeCtrl.setGifSearchDirection('left')"></button>
+                <button class="gifsStorefront__arrowGifs__right" ng-click="homeCtrl.setGifSearchDirection('right')"></button>
             </div>
         </div>
 
+        <!-- COMICS FORM -->
         <div class="userConfigComics" ng-show="homeCtrl.view == 2" ng-hide="homeCtrl.view != 2">
             <h2>Comics Favoritos</h2>
             <div class="favUserComics">
@@ -72,7 +75,8 @@
             </div>
 
             <div class="searchComics">
-                <input class="searchComics__input form-control" type="text" ng-model="homeCtrl.searchComics.text" ng-keyup="homeCtrl.timedSearchOfComics(homeCtrl.searchComics)">
+                <input class="searchComics__input form-control" type="text" ng-model="homeCtrl.searchComics.text">
+                <button ng-click="homeCtrl.timedSearchOfComics(homeCtrl.searchComics)">Buscar</button>
             </div>
 
             <div class="comicsStorefront">

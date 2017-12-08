@@ -17,25 +17,14 @@
         vm.searchGifs = {};
         vm.searchComics = {};
         vm.searchComics.offset = 0;
-        vm.view = 0;
+        vm.view = 'datos';
         
         // Functions Declaration
         vm.addUser = addUser;
-        vm.loadUserToEdit = loadUserToEdit;
         vm.editUser = editUser;
+        
+        vm.loadUserToEdit = loadUserToEdit;
         vm.deleteUser = deleteUser;
-        vm.loadGifsSearch = loadGifsSearch;
-        vm.changeView = changeView;
-        vm.addGif = addGif;
-        vm.removeGif = removeGif;
-        vm.addComic = addComic;
-        vm.removeComic = removeComic;
-        vm.checkFavComics = checkFavComics;
-        vm.checkFavGifs = checkFavGifs;
-        vm.timedSearchOfComics = timedSearchOfComics;
-        vm.increaseComicsOffsetRequest = increaseComicsOffsetRequest;
-        vm.decreaseComicsOffsetRequest = decreaseComicsOffsetRequest;
-        vm.setGifSearchDirection = setGifSearchDirection;
 
         activate();
 
@@ -81,82 +70,7 @@
                 UsersLocalProvider.remove(userToDelete);
             }
         }
-
-        function changeView(view){
-            if(view==0) vm.view = 0;
-            if(view==1) vm.view = 1;
-            if(view==2) vm.view = 2;
-        }
-
-        function loadGifsSearch(search) {
-            GifsGiphyProvider.getSearch(search).then(response => vm.gifs = response);
-        }
-
-        function addGif(gif) {
-            checkExistFavGifs();
-
-            let isExistId = vm.newUser.favGifs.includes(gif); 
-       
-            if (!isExistId) {
-                vm.newUser.favGifs.push(gif);
-            }
-        }
-
-        function removeGif(gif) {
-            for (let i = 0; i < vm.newUser.favGifs.length; i++) {
-                const userID = vm.newUser.favGifs[i].id;
-                if (userID == gif.id) vm.newUser.favGifs.splice(i, 1);
-            }
-        }
-
-        
-        function addComic(comic) {
-            checkExistFavComics();
             
-            let isExistId = vm.newUser.favComics.includes(comic);
-            
-            if (!isExistId) {
-                vm.newUser.favComics.push(comic);
-            }
-        }
-        
-        function removeComic(comic) {
-            for (let i = 0; i < vm.newUser.favComics.length; i++) {
-                const userID = vm.newUser.favComics[i].id;
-                if (userID == comic.id) vm.newUser.favComics.splice(i, 1);
-            }
-        }
-        
-        function checkFavGifs(item){ /* Mejorar naming de esto */
-            checkExistFavGifs();            
-            return vm.newUser.favGifs.includes(item);
-        }
-        
-        function checkFavComics(item){
-            checkExistFavComics();
-            return vm.newUser.favComics.includes(item);
-        }
-        
-        function timedSearchOfComics(search){
-            setTimeout(()=>{
-                loadComicsSearch(search);
-            },600);
-        }
-
-        function increaseComicsOffsetRequest(search){
-            search.offset += 3;
-            loadComicsSearch(search);            
-        }
-
-        function decreaseComicsOffsetRequest(search){
-            if(search.offset>0) search.offset -= 3;
-            loadComicsSearch(search);       
-        }
-
-        function setGifSearchDirection(direction){
-            vm.searchGifs.direction = direction;
-            loadGifsSearch(vm.searchGifs);
-        }
         
         //////////////// AUX FUNCTIONS
         
@@ -169,17 +83,5 @@
             vm.isEditProcess = false;
         }        
         
-        function checkExistFavGifs() {
-            if (typeof vm.newUser.favGifs === "undefined") vm.newUser.favGifs = [];
-        }
-        
-        function checkExistFavComics() {
-            if (typeof vm.newUser.favComics === "undefined") vm.newUser.favComics = [];
-        }
-
-        function loadComicsSearch(search) {
-            MarvelComicsProvider.getSearch(search).then(response => vm.comics = response);
-            
-        }
     }
 })();

@@ -1,0 +1,8 @@
+<div class="comicsStorefront">
+    <button class="arrow__left" ng-click="$ctrl.direction({directionComic:'left'})"></button>
+    <div class="comicsStorefront__images">
+        <img class="comicsStorefront__img" ng-repeat="comic in $ctrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="$ctrl.addComic(comic)"
+            ng-class="{borderClass : $ctrl.checkFavComics(comic)}">
+    </div>
+    <button class="arrow__right" ng-click="$ctrl.direction({directionComic:'right'})"></button>
+</div>

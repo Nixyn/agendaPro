@@ -1,0 +1,15 @@
+<div class="userConfigComics">
+    <h2>Comics Favoritos</h2>
+    <div class="favUserComics">
+        <img class="favUserComics__img" ng-repeat="comic in $ctrl.user.favComics track by comic.id" ng-src="{{comic.photo}}"
+            ng-click="$ctrl.removeComic(comic)">
+    </div>
+
+    <div class="searchComics">
+        <input class="searchComics__input form-control" type="text" ng-model="$ctrl.searchComics.text">
+        <button ng-click="$ctrl.loadComicsSearch($ctrl.searchComics)">Buscar</button>
+    </div>
+
+    <slider-comics-search comics="$ctrl.comics" user="$ctrl.user" direction="$ctrl.setComicSearchDirection(directionComic)"></slider-comics-search>
+
+</div>

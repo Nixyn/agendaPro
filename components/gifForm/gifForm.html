@@ -1,0 +1,18 @@
+<div class="userConfigGifs">
+    <h2>Gifs Favoritos</h2>
+    <div class="favUserGifs">
+        <img class="favUserGifs__img" ng-repeat="gif in $ctrl.user.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="$ctrl.removeGif(gif)">
+    </div>
+
+    <div class="searchGifs">
+        <input class="searchGifs__input form-control" type="text" ng-model="$ctrl.searchGifs.text">
+        <span>Épicos</span> |
+        <span>Recientes</span>
+        <button class="btn" ng-click="$ctrl.loadGifsSearch($ctrl.searchGifs)">Buscar</button>
+    </div>
+
+    <slider-gifs-search user="$ctrl.user" gifs="$ctrl.gifs" direction="$ctrl.setGifSearchDirection(directionGif)"
+        ng-show="$ctrl.gifs.length > 1">
+    </slider-gifs-search>
+
+</div>

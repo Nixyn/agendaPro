@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="AgendaPRO">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
 
     <title>Document</title>
 </head>
+
 <body>
 
     <div ng-view></div>
@@ -20,20 +22,26 @@
     <script src="libs/angular.js"></script>
     <script src="libs/angular-route.min.js"></script>
 
-    <!-- App -->    
+    <!-- App -->
     <script src="js/app.config.js"></script>
 
     <!-- Services and factories -->
     <script src="js/factories/UsersLocalProvider.factory.js"></script>
     <script src="js/factories/GifsGiphyProvider.factory.js"></script>
     <script src="js/factories/MarvelComicsProvider.factory.js"></script>
-    
+
     <!-- Components -->
     <script src="components/personalForm/personalForm.component.js"></script>
-    
+    <script src="components/sliderGifsSearch/sliderGifsSearch.component.js"></script>
+    <script src="components/gifForm/gifForm.component.js"></script>
+    <script src="components/sliderComicsSearch/sliderComicsSearch.component.js"></script>
+    <script src="components/comicForm/comicForm.component.js"></script>
+    <script src="components/userCard/userCard.component.js"></script>
+
     <!-- Controllers -->
     <script src="js/controllers/home.controller.js"></script>
     <script src="js/controllers/user.controller.js"></script>
 
 </body>
+
 </html>

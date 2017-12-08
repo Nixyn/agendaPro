@@ -34,10 +34,7 @@
         //////////////// MAIN FUNTIONS
         function getSearch(search) {
             let url = "";
-            console.log("pre ApiGiphy: ",vm.search);
             vm.search.selectVariation(search.direction);
-            console.log("post ApiGiphy: ",vm.search);
-
             if (search.trending == true) url = "https://api.giphy.com/v1/gifs/trending/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + vm.search.limit + "&offset=" + vm.search.offsetCount + "&rating=G&lang=en";
             else url = "https://api.giphy.com/v1/gifs/search?api_key=FPLQeogCrqyn0ztF519LgsyBZVLlJOYu&q=" + search.text + "&limit=" + vm.search.limit + "&offset=" + vm.search.offsetCount + "&rating=G&lang=en";
             

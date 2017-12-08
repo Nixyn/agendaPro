@@ -1,0 +1,12 @@
+<div class="userCard">
+    <img class="userCard__img" ng-src="{{$ctrl.user.photo}}" alt="user image" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
+    <div class="userCard__features">
+        <p class="userCard__name">Nombre: {{$ctrl.user.name}}</p>
+        <p class="userCard__phone">Teléfono: {{$ctrl.user.phone}}</p>
+        <div class="userCard__buttons">
+            <a class="userCard__buttons__more" href="#!/user/{{$ctrl.user.id}}"></a>
+            <button class="userCard__buttons__edit" ng-click="$ctrl.edit({userToEdit: $ctrl.user})"></button>
+            <button class="userCard__buttons__delete" ng-click="$ctrl.delete({userToDelete: $ctrl.user})"></button>
+        </div>
+    </div>
+</div>

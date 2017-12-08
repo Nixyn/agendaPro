@@ -1,0 +1,10 @@
+<div class="gifsStorefront">
+    <button class="arrow__left" ng-click="$ctrl.direction({directionGif:'left'})"></button>
+
+    <div class="gifsStorefront__images">
+        <img class="gifsStorefront__img" ng-repeat="gif in $ctrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="$ctrl.addGif(gif)"
+            ng-class="{borderClass : $ctrl.checkFavGifs(gif)}">
+    </div>
+
+    <button class="arrow__right" ng-click="$ctrl.direction({directionGif:'right'})"></button>
+</div>

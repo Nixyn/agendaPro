@@ -1,19 +1,8 @@
 <div class="containerHome">
+
     <section class="usersStorefront">
-
-        <div class="userCard" ng-repeat="user in homeCtrl.users track by user.id">
-            <img class="userCard__img" ng-src="{{user.photo}}" alt="user image" onerror="this.src='http://revistacosas.mx/sites/all/themes/themag/assets/images/default-user.png'">
-            <div class="userCard__features">
-                <p class="userCard__name">Nombre: {{user.name}}</p>
-                <p class="userCard__phone">Teléfono: {{user.phone}}</p>
-                <div class="userCard__buttons">
-                    <a class="userCard__buttons__more" href="#!/user/{{user.id}}"></a>
-                    <button class="userCard__buttons__edit" ng-click="homeCtrl.loadUserToEdit(user)"></button>
-                    <button class="userCard__buttons__delete" ng-click="homeCtrl.deleteUser(user)"></button>
-                </div>
-            </div>
-        </div>
-
+        <user-card ng-repeat="user in homeCtrl.users track by user.id" user="user" edit="homeCtrl.loadUserToEdit(userToEdit)"
+            delete="homeCtrl.deleteUser(userToDelete)"></user-card>
     </section>
 
     <aside class="userConfig">
@@ -22,66 +11,16 @@
         <div class="configNav">
             <h2 ng-if="!homeCtrl.isEditProcess">Nuevo Usuario</h2>
             <h2 ng-if="homeCtrl.isEditProcess">Modificar Usuario</h2>
-            <button class="btn" ng-click="homeCtrl.view = 0">Datos</button>
-            <button class="btn" ng-click="homeCtrl.view = 1">Gifs</button>
-            <button class="btn" ng-click="homeCtrl.view = 2">Comics</button>
+            <button class="btn" ng-click="homeCtrl.view = 'datos'">Datos</button>
+            <button class="btn" ng-click="homeCtrl.view = 'gifs'">Gifs</button>
+            <button class="btn" ng-click="homeCtrl.view = 'comics'">Comics</button>
         </div>
 
-        <personal-form class="personalForm" new-user="homeCtrl.newUser" main-form="homeCtrl.mainForm" ng-show="homeCtrl.view == 0"
-            ng-hide="homeCtrl.view != 0">
-        </personal-form>
+        <personal-form class="personalForm" new-user="homeCtrl.newUser" main-form="homeCtrl.mainForm" ng-show="homeCtrl.view == 'datos'"></personal-form>
 
+        <gif-form user="homeCtrl.newUser" ng-show="homeCtrl.view =='gifs'"></gif-form>
 
-
-        <!-- GIFS FORM -->
-        <div class="userConfigGifs" ng-show="homeCtrl.view == 1" ng-hide="homeCtrl.view != 1">
-            <h2>Gifs Favoritos</h2>
-            <div class="favUserGifs">
-                <img class="favUserGifs__img" ng-repeat="gif in homeCtrl.newUser.favGifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.removeGif(gif)">
-            </div>
-
-            <div class="searchGifs">
-                <input class="searchGifs__input form-control" type="text" ng-model="homeCtrl.searchGifs.text">
-                <span>Épicos</span> |
-                <span>Recientes</span>
-                <button class="btn" ng-click="homeCtrl.loadGifsSearch(homeCtrl.searchGifs)">Buscar</button>
-            </div>
-
-            <div class="gifsStorefront" ng-show="homeCtrl.gifs.length > 1">
-                <button class="arrow__left" ng-click="homeCtrl.setGifSearchDirection('left')"></button>
-
-                <div class="gifsStorefront__images">
-                    <img class="gifsStorefront__img" ng-repeat="gif in homeCtrl.gifs track by gif.id" ng-src="{{gif.url}}" ng-click="homeCtrl.addGif(gif)"
-                        ng-class="{borderClass : homeCtrl.checkFavGifs(gif)}">
-                </div>
-
-                <button class="arrow__right" ng-click="homeCtrl.setGifSearchDirection('right')"></button>
-            </div>
-        </div>
-
-        <!-- COMICS FORM -->
-        <div class="userConfigComics" ng-show="homeCtrl.view == 2" ng-hide="homeCtrl.view != 2">
-            <h2>Comics Favoritos</h2>
-            <div class="favUserComics">
-                <img class="favUserComics__img" ng-repeat="comic in homeCtrl.newUser.favComics track by comic.id" ng-src="{{comic.photo}}"
-                    ng-click="homeCtrl.removeComic(comic)">
-            </div>
-
-            <div class="searchComics">
-                <input class="searchComics__input form-control" type="text" ng-model="homeCtrl.searchComics.text">
-                <button ng-click="homeCtrl.timedSearchOfComics(homeCtrl.searchComics)">Buscar</button>
-            </div>
-
-            <div class="comicsStorefront">
-                <button class="arrow__left" ng-if="homeCtrl.searchComics.offset>0" ng-click="homeCtrl.decreaseComicsOffsetRequest(homeCtrl.searchComics)"></button>
-                <div class="comicsStorefront__images">
-                    <img class="comicsStorefront__img" ng-repeat="comic in homeCtrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="homeCtrl.addComic(comic)"
-                        ng-class="{borderClass : homeCtrl.checkFavComics(comic)}">
-                </div>
-
-                <button class="arrow__right" ng-click="homeCtrl.increaseComicsOffsetRequest(homeCtrl.searchComics)"></button>
-            </div>
-        </div>
+        <comic-form user="homeCtrl.newUser" ng-show="homeCtrl.view == 'comics'"></comic-form>
 
         <button class="btn btn-success" ng-if="!homeCtrl.isEditProcess" ng-click="homeCtrl.addUser()" ng-disabled="homeCtrl.mainForm.$invalid">Añadir Usuario</button>
         <button class="btn btn-success" ng-if="homeCtrl.isEditProcess" ng-click="homeCtrl.editUser()" ng-disabled="homeCtrl.mainForm.$invalid">Modificar</button>

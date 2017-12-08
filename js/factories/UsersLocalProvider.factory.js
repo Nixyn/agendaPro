@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,66 +7,65 @@
 
     UsersLocalProvider.$inject = [];
     function UsersLocalProvider() {
-        var service = {
-            getUsers:getUsers,
-            add:add,
-            remove:remove,
-            editUser:editUser,
-            get:get
-        };
         
+        /* __________________________: Functions Declaration :_________________________ */
+        var service = {
+            getUsers: getUsers,
+            add: add,
+            remove: remove,
+            editUser: editUser,
+            get: get,
+            createID:createID
+        };
+
         return service;
 
-        ////////////////
-        
-        function getUsers(){
-            if("users" in localStorage){
+        //////////////////////////////// MAIN FUNTIONS ////////////////////////////////
+
+        function getUsers() {
+            if ("users" in localStorage) {
                 let users = JSON.parse(localStorage.getItem("users"));
                 return users;
-            } 
+            }
             else {
-                localStorage.setItem("users",JSON.stringify([]));;
+                localStorage.setItem("users", JSON.stringify([]));;
                 return [];
             }
         }
 
         function add(user) {
             let users = JSON.parse(localStorage.getItem("users"));
-            users.push(user); 
-            localStorage.setItem("users",JSON.stringify(users));
+            users.push(user);
+            localStorage.setItem("users", JSON.stringify(users));
         }
 
-        function remove(user){                     
+        function remove(user) {
             let users = JSON.parse(localStorage.getItem("users"));
             let idToDelete = user.id;
+            let index = users.findIndex(user => { return user.id === idToDelete });
 
-            for (let i = 0; i < users.length; i++) {
-                const userID = users[i].id;
-                if(userID==idToDelete) users.splice(i,1);
-            }
-            
-            localStorage.setItem("users",JSON.stringify(users));
+            users.splice(index, 1);
+            localStorage.setItem("users", JSON.stringify(users));
         }
 
-        function editUser(user){
+        function editUser(user) {
             let users = JSON.parse(localStorage.getItem("users"));
             let idToEdit = user.id;
-            
-            for (let i = 0; i < users.length; i++) {
-                const userID = users[i].id;
-                if(userID==idToEdit) users[i]= user;
-            }
-            
-            localStorage.setItem("users",JSON.stringify(users));
+            let index = users.findIndex(user => { return user.id === idToEdit });
+
+            users[index] = user;
+            localStorage.setItem("users", JSON.stringify(users));
         }
 
-        function get(userId){
+        function get(userId) {
             let users = JSON.parse(localStorage.getItem("users"));
-            
-            for (let i = 0; i < users.length; i++) {
-                const userID = users[i].id;
-                if(userID==userId) return users[i];
-            }
+            let index = users.findIndex(user => { return user.id === userId });
+
+            return users[index];
+        }
+
+        function createID() {
+            return Math.random().toString(36).substr(2, 10);
         }
     }
 })();

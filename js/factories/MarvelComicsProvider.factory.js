@@ -7,6 +7,8 @@
 
     MarvelComicsProvider.$inject = ['$http'];
     function MarvelComicsProvider($http) {
+        
+        /* __________________________: Variables Declaration :_________________________ */
         let vm = this;
         vm.search = {
             offsetCount: 0,
@@ -27,6 +29,7 @@
         vm.apiKey = "c0f0a669d3d9cb10bc99b228a2809f8f";
         vm.hash = "be02e436e63fbe4deb1f716e27230084";
 
+        /* __________________________: Functions Declaration :_________________________ */
         let service = {
             getSearch: getSearch,
         };
@@ -36,7 +39,6 @@
         //////////////////////////////// MAIN FUNTIONS ////////////////////////////////
 
         function getSearch(search) {
-            console.log(search.direction)
             vm.search.selectVariation(search.direction);
             let url = "https://gateway.marvel.com/v1/public/comics?ts=1&titleStartsWith=" + search.text + "&limit=" + vm.search.limit + "&offset=" + vm.search.offsetCount + "&apikey=" + vm.apiKey + "&hash=" + vm.hash;
             return $http.get(url)
@@ -47,12 +49,10 @@
         //////////////////////////////// AUX FUNTIONS /////////////////////////////////
 
         function comicsRecived(response) {
-            /* Check si ha arrayComics por que esto significa que si hay ha habido una peticion ya y lo que estamos es eliminar imagenes no validas y haces una peticion inferior a 3 */
             let arrayComics = [];
             let data = response.data.data.results;
             vm.offsetCount += vm.offset;
 
-            console.log(data);
             for (let i = 0; i < data.length; i++) {
                 let comic = {};
                 comic.id = data[i].id;

@@ -5,21 +5,17 @@
         .module('AgendaPRO')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ["UsersLocalProvider", "GifsGiphyProvider", "MarvelComicsProvider"];
-    function HomeController(UsersLocalProvider, GifsGiphyProvider, MarvelComicsProvider) {
-        // Variables Declaration
+    HomeController.$inject = ["UsersLocalProvider"];
+    function HomeController(UsersLocalProvider) {
+
+         /* __________________________: Variables Declaration :_________________________ */
         var vm = this;
         vm.users = [];
         vm.newUser = {};
         vm.isEditProcess = false;
-        vm.gifs = [];
-        vm.comics = [];
-        vm.searchGifs = {};
-        vm.searchComics = {};
-        vm.searchComics.offset = 0;
         vm.view = 'datos';
         
-        // Functions Declaration
+        /* __________________________: Functions Declaration :_________________________ */
         vm.addUser = addUser;
         vm.editUser = editUser;
         
@@ -28,14 +24,14 @@
 
         activate();
 
-        //////////////// MAIN FUNCTIONS
+        //////////////////////////////// MAIN FUNTIONS ////////////////////////////////
 
         function activate() {
             vm.users = UsersLocalProvider.getUsers()
         }
 
         function addUser() {
-            vm.newUser.id = createID();
+            vm.newUser.id = UsersLocalProvider.createID();
             UsersLocalProvider.add(vm.newUser);
             vm.users.push(vm.newUser);
             cleanFields();
@@ -48,12 +44,10 @@
 
         function editUser() {
             let idToEdit = vm.newUser.id;
-
-            for (let i = 0; i < vm.users.length; i++) {
-                const userID = vm.users[i].id;
-                if (userID == idToEdit) vm.users[i] = vm.newUser;
-            }
+            let index = vm.users.findIndex(user => { return user.id === idToEdit });
+            
             UsersLocalProvider.editUser(vm.newUser);
+            vm.users[index] = vm.newUser;
             cleanFields();
         }
 
@@ -62,21 +56,15 @@
             let idToDelete = userToDelete.id;
 
             if (stringConfirm == userToDelete.name) {
-                for (let i = 0; i < vm.users.length; i++) {
-                    const userID = vm.users[i].id;
-                    if (userID == idToDelete) vm.users.splice(i, 1);
-                }
+                let index = vm.users.findIndex(user => { return user.id === idToDelete });
 
                 UsersLocalProvider.remove(userToDelete);
+                vm.users.splice(i, 1);
             }
         }
             
         
-        //////////////// AUX FUNCTIONS
-        
-        function createID() {
-            return Math.random().toString(36).substr(2, 10);
-        }
+        //////////////////////////////// AUX FUNTIONS /////////////////////////////////
         
         function cleanFields() {
             vm.newUser = {};

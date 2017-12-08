@@ -7,6 +7,8 @@
 
     GifsGiphyProvider.$inject = ['$http'];
     function GifsGiphyProvider($http) {
+        
+        /* __________________________: Variable Declaration :_________________________ */
         let vm = this;
         vm.search = {
             offsetCount: 0,
@@ -25,13 +27,14 @@
 
         }
 
+        /* __________________________: Functions Declaration :_________________________ */
         var service = {
             getSearch: getSearch
         };
 
         return service;
 
-        //////////////// MAIN FUNTIONS
+        //////////////////////////////// MAIN FUNTIONS ////////////////////////////////
         function getSearch(search) {
             let url = "";
             vm.search.selectVariation(search.direction);
@@ -43,7 +46,7 @@
                 .catch(failRequest);
         }
 
-        //////////////// AUX FUNTIONS
+        //////////////////////////////// AUX FUNTIONS ////////////////////////////////
 
         function gifsRecived(response) {
             let arrayGifs = [];

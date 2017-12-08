@@ -25,7 +25,7 @@
         $ctrl.setComicSearchDirection = setComicSearchDirection
         $ctrl.loadComicsSearch = loadComicsSearch
 
-        ////////////////
+        //////////////////////////////// MAIN FUNTIONS ////////////////////////////////
 
         $ctrl.$onInit = function() { };
         $ctrl.$onChanges = function(changesObj) { };

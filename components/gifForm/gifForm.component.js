@@ -25,7 +25,7 @@
         $ctrl.removeGif = removeGif;
         $ctrl.setGifSearchDirection = setGifSearchDirection; 
 
-        ////////////////
+        //////////////////////////////// MAIN FUNTIONS ////////////////////////////////
 
         $ctrl.$onInit = function () { };
         $ctrl.$onChanges = function (changesObj) { };

@@ -23,6 +23,7 @@
     function sliderComicsSearchController() {
         var $ctrl = this;
         
+        $ctrl.arrowLeft = 'hidden';
         $ctrl.addComic = addComic;
         $ctrl.checkFavComics = checkFavComics;
         

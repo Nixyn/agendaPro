@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/components/gifForm/gifForm.css">
 <div class="userConfigGifs">
     <h2>Gifs Favoritos</h2>
     <div class="favUserGifs">
@@ -6,13 +7,12 @@
 
     <div class="searchGifs">
         <input class="searchGifs__input form-control" type="text" ng-model="$ctrl.searchGifs.text">
-        <span>Épicos</span> |
-        <span>Recientes</span>
+        <span ng-click="$ctrl.searchGifs.trending=true"  ng-class="{bold:($ctrl.searchGifs.trending==true)}">Épicos</span> |
+        <span ng-click="$ctrl.searchGifs.trending=false" ng-class="{bold:$ctrl.searchGifs.trending==false}">Recientes</span>
         <button class="btn" ng-click="$ctrl.loadGifsSearch($ctrl.searchGifs)">Buscar</button>
     </div>
 
-    <slider-gifs-search user="$ctrl.user" gifs="$ctrl.gifs" direction="$ctrl.setGifSearchDirection(directionGif)"
-        ng-show="$ctrl.gifs.length > 1">
+    <slider-gifs-search user="$ctrl.user" gifs="$ctrl.gifs" direction="$ctrl.setGifSearchDirection(directionGif)" ng-show="$ctrl.gifs.length > 1">
     </slider-gifs-search>
 
 </div>

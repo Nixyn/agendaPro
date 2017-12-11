@@ -5,8 +5,8 @@
         .module('AgendaPRO')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ["UsersLocalProvider"];
-    function HomeController(UsersLocalProvider) {
+    HomeController.$inject = ['UsersLocalProvider','$firebaseObject'];
+    function HomeController(UsersLocalProvider,$firebaseObject) {
 
          /* __________________________: Variables Declaration :_________________________ */
         var vm = this;
@@ -18,7 +18,6 @@
         /* __________________________: Functions Declaration :_________________________ */
         vm.addUser = addUser;
         vm.editUser = editUser;
-        
         vm.loadUserToEdit = loadUserToEdit;
         vm.deleteUser = deleteUser;
 
@@ -44,7 +43,7 @@
 
         function editUser() {
             let idToEdit = vm.newUser.id;
-            let index = vm.users.findIndex(user => { return user.id === idToEdit });
+            let index = vm.users.findIndex(user => user.id === idToEdit);
             
             UsersLocalProvider.editUser(vm.newUser);
             vm.users[index] = vm.newUser;
@@ -52,18 +51,17 @@
         }
 
         function deleteUser(userToDelete) {
-            let stringConfirm = prompt("Para borra el usuario se necesita escribir su nombre:   ");
+            let stringConfirm = prompt('Para borra el usuario se necesita escribir su nombre:   ');
             let idToDelete = userToDelete.id;
 
             if (stringConfirm == userToDelete.name) {
-                let index = vm.users.findIndex(user => { return user.id === idToDelete });
+                let index = vm.users.findIndex(user => user.id === idToDelete );
 
                 UsersLocalProvider.remove(userToDelete);
                 vm.users.splice(i, 1);
             }
         }
-            
-        
+                 
         //////////////////////////////// AUX FUNTIONS /////////////////////////////////
         
         function cleanFields() {

@@ -1,0 +1,21 @@
+/* User Comics */
+.searchComics{
+    width: 100%;
+}
+
+.favUserComics{
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    background: rgb(235, 235, 235);
+    align-self: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    overflow-y: scroll;
+    margin: 10px 0;
+}
+
+.favUserComics::-webkit-scrollbar{
+    display: none;
+}

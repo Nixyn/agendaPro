@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module("AgendaPRO", ["ngRoute"])
+    angular.module("AgendaPRO", ["ngRoute","firebase"])
         .config(config);
 
     config.$inject = ["$routeProvider"];

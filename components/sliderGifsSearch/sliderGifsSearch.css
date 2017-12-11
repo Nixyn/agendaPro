@@ -1,0 +1,30 @@
+.gifsStorefront{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.gifsStorefront__images{
+    width: 85%;
+}
+
+.arrow__right,.arrow__left{
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Angle_right_font_awesome.svg/2000px-Angle_right_font_awesome.svg.png");
+    background-size: 30px 30px;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.arrow__left{
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Angle_left_font_awesome.svg/768px-Angle_left_font_awesome.svg.png");
+}
+.gifsStorefront__img{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin: 10px;
+    border-radius: 5px;
+}

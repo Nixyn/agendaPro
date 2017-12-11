@@ -21,6 +21,20 @@
     <!-- Third Party Libraries -->
     <script src="libs/angular.js"></script>
     <script src="libs/angular-route.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>F
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAPvhLBPcEOSzUuMf8b0tLr1nBMVZa9B-w",
+            authDomain: "agendapro-c6c3a.firebaseapp.com",
+            databaseURL: "https://agendapro-c6c3a.firebaseio.com",
+            projectId: "agendapro-c6c3a",
+            storageBucket: "agendapro-c6c3a.appspot.com",
+            messagingSenderId: "1016700915779"
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <!-- App -->
     <script src="js/app.config.js"></script>

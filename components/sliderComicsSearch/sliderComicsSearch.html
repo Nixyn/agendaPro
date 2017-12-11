@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="/components/sliderComicsSearch/sliderComicsSearch.css">
 <div class="comicsStorefront">
-    <button class="arrow__left" ng-click="$ctrl.direction({directionComic:'left'})"></button>
+    <button class="arrow__left" ng-click="$ctrl.direction({directionComic:'left'})" ng-if="$ctrl.arrowLeft=='visible'"></button>
     <div class="comicsStorefront__images">
         <img class="comicsStorefront__img" ng-repeat="comic in $ctrl.comics track by comic.id" ng-src="{{comic.photo}}" ng-click="$ctrl.addComic(comic)"
             ng-class="{borderClass : $ctrl.checkFavComics(comic)}">
